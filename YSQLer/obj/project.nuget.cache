@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "xqGjYrDkbZDijw6RwlLnUEjq7z4dKX/Dz7lao1cnKo4C0SKECWrP5zVCAajA8epq7rxY1znXkFZwqRbWNNtGyw==",
+  "success": true,
+  "projectFilePath": "F:\\app\\YSQLer\\YSQLer\\YSQLer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cong\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.9\\microsoft.visualstudio.azure.containers.tools.targets.1.10.9.nupkg.sha512"
+  ],
+  "logs": []
+}
