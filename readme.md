@@ -1,8 +1,8 @@
-> #  sql 转换RESTful 脚手架
+> #  sql 转换RESTful脚手架
 
 
 
-YSqler是一个微型叫数据库表转换restful接口，用c#语言编写，以便任何人能执行查询、删除、修改，非标准restful定义。
+YSqler是一个微型数据表转换restful接口，用c#语言编写，以便任何人不需要编写任何代码能执行查询、删除、修改。
 
 
 
@@ -18,11 +18,13 @@ YSqler是一个微型叫数据库表转换restful接口，用c#语言编写，�
 
 
 
+
+
 > # 使用
 
 
 
-> # 1、查询
+# 1、查询
 
 ```json
 http://localhost:4000/books #books表名
@@ -42,7 +44,7 @@ http://localhost:4000/books?offset=1&limit=10 #offset第一页，limit取10条
 
 
 
-> # 2、修改
+# 2、修改
 
 ```json
 http://localhost:4000/books/2 #通过主键id=2
@@ -63,7 +65,7 @@ http://localhost:4000/books/2 #通过主键id=2
 
 
 
-> # 3、添加
+# 3、添加
 
 ```json
 http://localhost:4000/books
@@ -78,7 +80,7 @@ http://localhost:4000/books
 
 
 
-> # 4、删除
+# 4、删除
 
 ```json
 http://localhost:4000/books/2 #通过主键id=2 删除
