@@ -6,7 +6,7 @@ using System.Text;
 
 namespace YSQLer.Core
 {
-    public class YSQLerIocContainer
+    internal class YSQLerIocContainer
     {
         public static SQLBuilder CreateInsertBuilder(HttpContext httpContext, RouteData routeData)
         {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace YSQLer.Core
 {
-    public static class Contansts
+    internal static class Contansts
     {
         public static Dictionary<string, string> TablePrimaryKey = new Dictionary<string, string>();
 

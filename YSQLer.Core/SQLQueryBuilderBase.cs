@@ -5,7 +5,7 @@ using System.Text;
 
 namespace YSQLer.Core
 {
-    public  class SQLQueryBuilderBase : SQLBuilder
+    internal abstract class SQLQueryBuilderBase : SQLBuilder
     {
         public string ToCountSql()
         {

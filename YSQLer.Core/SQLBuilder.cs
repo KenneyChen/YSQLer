@@ -10,7 +10,7 @@ using System.Text.Json;
 
 namespace YSQLer.Core
 {
-    public abstract class SQLBuilder
+    internal abstract class SQLBuilder
     {
         public HttpContext HttpContext { get; set; }
         public RouteData RouteData { get; set; }

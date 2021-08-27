@@ -6,7 +6,7 @@ using System.Text;
 
 namespace YSQLer.Core
 {
-    public class MySQLDeleteBuilder : SQLBuilder
+    internal class MySQLDeleteBuilder : SQLBuilder
     {
         public override string ToSql()
         {

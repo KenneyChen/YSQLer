@@ -7,12 +7,12 @@ namespace YSQLer.Core.Model
     /// <summary>
     /// 查询参数
     /// </summary>
-    public class QueryInfo
+    internal class QueryInfo
     {
         public QueryInfoBody Query { get; set; }
     }
 
-    public class QueryInfoBody
+    internal class QueryInfoBody
     {
         public string fileds { get; set; }
     }

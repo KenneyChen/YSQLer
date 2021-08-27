@@ -4,7 +4,7 @@ using System.Text;
 
 namespace YSQLer.Core
 {
-    internal class ReturnModel
+    public class ReturnModel
     {
 
         public bool success { get; set; }
@@ -21,7 +21,7 @@ namespace YSQLer.Core
         }
     }
 
-    internal class PageObject
+    public class PageObject
     {
         /// <summary>
         /// 当前总数
@@ -33,7 +33,7 @@ namespace YSQLer.Core
         public Object Records { get; set; }
     }
 
-    internal class ReturnModel<T> : ReturnModel
+    public class ReturnModel<T> : ReturnModel
     {
         public T data { get; set; }
 

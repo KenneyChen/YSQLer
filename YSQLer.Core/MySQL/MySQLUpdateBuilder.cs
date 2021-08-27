@@ -3,17 +3,34 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 
 namespace YSQLer.Core
 {
-    public class MySQLUpdateBuilder : SQLQueryBuilderBase, ISQLBuilder
+    internal class MySQLUpdateBuilder : SQLQueryBuilderBase
     {
         public List<string> Fileds()
         {
-            return null;
+            var doc = JsonDocument.Parse(this.Json());
+            var enumerate = doc.RootElement
+                .GetProperty("add")
+                .EnumerateObject();
+
+            var fileds = new List<string>();
+            while (enumerate.MoveNext())
+            {
+                var cur = enumerate.Current;
+                if (cur.Name=="filter")
+                {
+                    continue;
+                }
+                fileds.Add(cur.Name);
+                this.Paramters.Add(new SqlParameter(cur.Name, cur.Value));
+            }
+            return fileds;
         }
 
-        public string ToSql()
+        public override string ToSql()
         {
             var setFileds = this.Fileds()
                 .Select(f => f + "=@" + f)

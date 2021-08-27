@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace YSQLer.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("{controller}/{table}")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -21,6 +21,34 @@ namespace YSQLer.Controllers
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
+        }
+
+        [Route("query/{id?}")]
+        [HttpGet]
+        public IEnumerable<WeatherForecast> Test2()
+        {
+            var rng = new Random();
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = Summaries[rng.Next(Summaries.Length)]
+            })
+            .ToArray();
+        }
+
+        [Route("[Action]")]
+        [HttpGet]
+        public IEnumerable<WeatherForecast> Test()
+        {
+            var rng = new Random();
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = Summaries[rng.Next(Summaries.Length)]
+            })
+            .ToArray();
         }
 
         [HttpGet]

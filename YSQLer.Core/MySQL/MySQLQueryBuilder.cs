@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace YSQLer.Core
 {
-    public class MySQLQueryBuilder : SQLQueryBuilderBase
+    internal class MySQLQueryBuilder : SQLQueryBuilderBase
     {
         public List<string> Fileds()
         {
