@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using YSQLer.Core;
 
 namespace YSQLer
 {
@@ -18,6 +19,8 @@ namespace YSQLer
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            YSQLerAppSettings.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }

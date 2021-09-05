@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YSQLer.Core", "YSQLer.Core\YSQLer.Core.csproj", "{8EACFC24-D805-4AE5-909C-62DD9115A578}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YSQLer", "YSQLer\YSQLer.csproj", "{6A323CD3-6C88-49BF-93AD-41F7B000F04B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YSQLer", "YSQLer\YSQLer.csproj", "{6A323CD3-6C88-49BF-93AD-41F7B000F04B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YSQLerTests", "YSQLerTests\YSQLerTests.csproj", "{F4E6A7BB-8016-42DF-8A56-722AAC166E1B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YSQLer.SDK", "YSQLer.SDK\YSQLer.SDK.csproj", "{6B57457D-18DE-4997-BFD4-B589EFF240AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8EACFC24-D805-4AE5-909C-62DD9115A578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8EACFC24-D805-4AE5-909C-62DD9115A578}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8EACFC24-D805-4AE5-909C-62DD9115A578}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8EACFC24-D805-4AE5-909C-62DD9115A578}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6A323CD3-6C88-49BF-93AD-41F7B000F04B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6A323CD3-6C88-49BF-93AD-41F7B000F04B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A323CD3-6C88-49BF-93AD-41F7B000F04B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A323CD3-6C88-49BF-93AD-41F7B000F04B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4E6A7BB-8016-42DF-8A56-722AAC166E1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4E6A7BB-8016-42DF-8A56-722AAC166E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4E6A7BB-8016-42DF-8A56-722AAC166E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4E6A7BB-8016-42DF-8A56-722AAC166E1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B57457D-18DE-4997-BFD4-B589EFF240AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B57457D-18DE-4997-BFD4-B589EFF240AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B57457D-18DE-4997-BFD4-B589EFF240AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B57457D-18DE-4997-BFD4-B589EFF240AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

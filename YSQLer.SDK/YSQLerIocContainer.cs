@@ -76,7 +76,7 @@ namespace YSQLer.Core
 
             switch (YSQLerAppSettings.GetDbType())
             {
-                case DbType.Mysql:
+                case DbType.MySQL:
                     builder = new MySQLQueryBuilder()
                     {
                         HttpContext = httpContext,

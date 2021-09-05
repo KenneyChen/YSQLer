@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\app\\YSQLer\\YSQLer.Core\\YSQLer.Core.csproj": {}
+    "F:\\app\\YSQLer\\YSQLer.SDK\\YSQLer.SDK.csproj": {}
   },
   "projects": {
-    "F:\\app\\YSQLer\\YSQLer.Core\\YSQLer.Core.csproj": {
+    "F:\\app\\YSQLer\\YSQLer.SDK\\YSQLer.SDK.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\app\\YSQLer\\YSQLer.Core\\YSQLer.Core.csproj",
-        "projectName": "YSQLer.Core",
-        "projectPath": "F:\\app\\YSQLer\\YSQLer.Core\\YSQLer.Core.csproj",
+        "projectUniqueName": "F:\\app\\YSQLer\\YSQLer.SDK\\YSQLer.SDK.csproj",
+        "projectName": "YSQLer.SDK",
+        "projectPath": "F:\\app\\YSQLer\\YSQLer.SDK\\YSQLer.SDK.csproj",
         "packagesPath": "C:\\Users\\cong\\.nuget\\packages\\",
-        "outputPath": "F:\\app\\YSQLer\\YSQLer.Core\\obj\\",
+        "outputPath": "F:\\app\\YSQLer\\YSQLer.SDK\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\cong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -67,6 +67,10 @@
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[3.1.9, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.25, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",

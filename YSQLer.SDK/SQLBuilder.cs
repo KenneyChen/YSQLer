@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Dapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
@@ -15,20 +16,44 @@ namespace YSQLer.Core
         public HttpContext HttpContext { get; set; }
         public RouteData RouteData { get; set; }
 
-        internal List<SqlParameter> Paramters { get; }
+        internal DynamicParameters Paramters { get; set; }
+
+        private string json;
 
         public SQLBuilder()
         {
-            this.Paramters = new List<SqlParameter>();
+            this.Paramters = new DynamicParameters();
         }
 
         public string Json()
         {
-            using (var st = HttpContext.Request.Body)
+            if (json!=null)
             {
-                var bytes = new byte[st.Length];
-                st.Read(bytes, 0, (int)st.Length);
-                return Encoding.UTF8.GetString(bytes);
+                return json;
+            }
+            if (HttpContext.Request.ContentLength == 0 || HttpContext.Request.ContentLength == null)
+            {
+                return null;
+            }
+
+            //操作Request.Body之前加上EnableBuffering即可
+            HttpContext.Request.EnableBuffering();
+            StreamReader stream = new StreamReader(HttpContext.Request.Body);
+            string body = stream.ReadToEndAsync().GetAwaiter().GetResult();
+            //用完了我们尽量也重置一下，自己的坑自己填
+            HttpContext.Request.Body.Seek(0, SeekOrigin.Begin);
+
+            return json = body;
+        }
+
+        /// <summary>
+        /// 是否分页
+        /// </summary>
+        public bool Paging
+        {
+            get
+            {
+                return HttpContext.Request.Query.ContainsKey("offset");
             }
         }
 
@@ -40,7 +65,7 @@ namespace YSQLer.Core
                 return Convert.ToInt32(offset);
             }
 
-            return 0;
+            return 1;
         }
 
         public int Size()
@@ -50,7 +75,7 @@ namespace YSQLer.Core
                 var limit = HttpContext.Request.Query["limit"].ToString();
                 return Convert.ToInt32(limit);
             }
-            return 0;
+            return 999;
         }
 
         public string Table()
@@ -65,15 +90,15 @@ namespace YSQLer.Core
             //如果传入主键查询
             if (GetKeyValue() != null)
             {
-                var dt = SqlHelper.Query($"desc {r};", null);
-                var primary = dt.PrimaryKey;
-                if (primary.Length == 0)
+                var dt = DapperHelper.Query($"desc {r};", null);
+                var primary = dt.Select("key='PRI'").ToList();
+                if (primary.Count == 0)
                 {
                     throw new Exception($"此表无主键:{r}，请使用filter节点处理");
                 }
-                Contansts.Add(r, primary.ToList().Where(f=>f.Unique==true).Select(f=>f.ColumnName).FirstOrDefault());
+                Contansts.Add(r, primary[0]["Field"].ToString());
             }
-           
+
             return r;
         }
 
@@ -89,11 +114,18 @@ namespace YSQLer.Core
             {
                 //$key$ 特殊标记，代表主键
                 var keyColumName = $"{Contansts.Get(Table())}";
-                this.Paramters.Add(new SqlParameter(keyColumName, routeData));
+                if (!this.Paramters.ParameterNames.Any(f => f== keyColumName))
+                {
+                    this.Paramters.Add(keyColumName, routeData);
+                }
                 return $"{keyColumName}=@{keyColumName}";
             }
             else
             {
+                if (string.IsNullOrWhiteSpace(this.Json()))
+                {
+                    throw new Exception("找不到filter条件");
+                }
                 var doc = JsonDocument.Parse(this.Json());
                 var enumerate = doc.RootElement
                     .GetProperty(root)
@@ -104,12 +136,15 @@ namespace YSQLer.Core
                 while (enumerate.MoveNext())
                 {
                     var cur = enumerate.Current;
-                    fileds.Add(cur.Name);
-                    this.Paramters.Add(new SqlParameter(cur.Name, cur.Value));
+                    fileds.Add(cur.Name+"=@"+cur.Name);
+                    if (!this.Paramters.ParameterNames.Any(f => f == cur.Name))
+                    {
+                        this.Paramters.Add(cur.Name, cur.Value.ToString());
+                    }
                 }
                 if (fileds.Count == 0)
                 {
-                    return "1=1";
+                    throw new Exception("获取filter条件为空");
                 }
                 return string.Join(" and ", fileds);
             }

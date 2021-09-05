@@ -13,7 +13,7 @@ namespace YSQLer.Core
             var type = YSQLerAppSettings.GetDbType();
             switch (type)
             {
-                case DbType.Mysql:
+                case DbType.MySQL:
                     return new MySqlConnection(connectionString);
                 case DbType.MSSQL:
                     return new SqlConnection(connectionString);
@@ -25,7 +25,7 @@ namespace YSQLer.Core
     }
     public enum DbType
     {
-        Mysql = 2,
+        MySQL = 2,
         MSSQL = 1,
     }
 }

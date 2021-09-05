@@ -7,30 +7,38 @@ using System.Text.Json;
 
 namespace YSQLer.Core
 {
-    internal class MySQLInsertBuilder : SQLQueryBuilderBase
+    internal class MySQLUpdateBuilder : SQLQueryBuilderBase
     {
         public List<string> Fileds()
         {
             var doc = JsonDocument.Parse(this.Json());
             var enumerate = doc.RootElement
-                .GetProperty("add")
+                .GetProperty("update")
                 .EnumerateObject();
 
             var fileds = new List<string>();
             while (enumerate.MoveNext())
             {
                 var cur = enumerate.Current;
+                if (cur.Name=="filter")
+                {
+                    continue;
+                }
                 fileds.Add(cur.Name);
-                this.Paramters.Add(new SqlParameter(cur.Name, cur.Value));
+                this.Paramters.Add(cur.Name, cur.Value.ToString());
             }
             return fileds;
         }
 
         public override string ToSql()
         {
-            var colums = string.Join(",", this.Fileds());
-            var values = string.Join(",", this.Fileds().Select(f=>"@"+f).ToList());
-            return $"insert into{this.Table()}(colums) values ({values})";
+            var setFileds = this.Fileds()
+                .Select(f => f + "=@" + f)
+                .ToList();
+
+            return $"update {this.Table()} " +
+                $"set {string.Join(",", setFileds)} " +
+                $"where {this.Where("update")}";
         }
     }
 }

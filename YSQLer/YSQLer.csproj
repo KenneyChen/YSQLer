@@ -4,14 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>9a2b8263-9178-4a88-9ff2-e4d6780b75b7</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\YSQLer.Core\YSQLer.Core.csproj" />
+    <ProjectReference Include="..\YSQLer.SDK\YSQLer.SDK.csproj" />
   </ItemGroup>
 
 

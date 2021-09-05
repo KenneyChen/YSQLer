@@ -11,7 +11,7 @@ namespace YSQLer.Core
     {
         public static IConfiguration Configuration;
 
-        public static string GetConnectionString()
+        internal static string GetConnectionString()
         {
             var connection = Configuration.GetConnectionString("YSQLerConnection");
             var dbType = Configuration.GetConnectionString("YSQLerDbType");
@@ -25,12 +25,12 @@ namespace YSQLer.Core
             return connection;
         }
 
-        public static DbType GetDbType()
+        internal static DbType GetDbType()
         {
             var value = Configuration.GetConnectionString("YSQLerDbType");
             if (value == null)
             {
-                return DbType.Mysql;
+                return DbType.MySQL;
             }
             return (DbType)Enum.Parse(typeof(DbType), value);
         }

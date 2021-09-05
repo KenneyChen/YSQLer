@@ -27,7 +27,7 @@ namespace YSQLer.Core
                     var dic = new Dictionary<string, object>();
                     foreach (DataColumn column in dt.Columns)
                     {
-                        dic.Add(column.ColumnName, item[column.ColumnName] == System.DBNull.Value
+                        dic.Add(column.ColumnName.FirstToLower(), item[column.ColumnName] == System.DBNull.Value
                             ? null
                             : item[column.ColumnName]);
                     }
@@ -38,6 +38,7 @@ namespace YSQLer.Core
             return new ReturnModel<PageObject>
             {
                 msg = "请求成功",
+                success = true,
                 data = new PageObject()
                 {
                     Records = result,
@@ -51,7 +52,7 @@ namespace YSQLer.Core
             var builder = YSQLerIocContainer.CreateUpdateBuilder(httpContext, routeData);
             var sql = builder.ToSql();
             var paramter = builder.Paramters;
-            var r = DapperHelper.Excute(sql, paramter);             
+            var r = DapperHelper.Excute(sql, paramter);
             return ReturnModel.Init(r);
         }
 
@@ -64,13 +65,23 @@ namespace YSQLer.Core
             return ReturnModel.Init(r);
         }
 
-        public static ReturnModel Insert(HttpContext httpContext, RouteData routeData)
+        public static object Insert(HttpContext httpContext, RouteData routeData)
         {
             var builder = YSQLerIocContainer.CreateInsertBuilder(httpContext, routeData);
             var sql = builder.ToSql();
             var paramter = builder.Paramters;
-            var r = DapperHelper.Excute(sql, paramter);
-            return ReturnModel.Init(r);
+            var r = DapperHelper.ExecuteScalar(sql, paramter);
+            return new ReturnModel<object>
+            {
+                data = new { id = r },
+                success = true,
+                msg = "插入成功",
+            };
+        }
+
+        private static string FirstToLower(this string name)
+        {
+            return name.Substring(0, 1).ToLower() + name.Substring(1);
         }
     }
 }
